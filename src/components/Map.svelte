@@ -326,6 +326,10 @@
         if (map && map.getSource('visited-stations')) {
             updateMap(0);
         }
+
+        // restart playback
+        isPlaying = true;
+        animate();        
     }
 </script>
 
