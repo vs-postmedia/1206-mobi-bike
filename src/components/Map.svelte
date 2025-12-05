@@ -334,9 +334,9 @@
         }
     }
 
-    function pausePlay() {
-        isPlaying = !isPlaying;
-    }
+    // function pausePlay() {
+    //     isPlaying = !isPlaying;
+    // }
 
     function reset() {
         isPlaying = false;
@@ -373,9 +373,9 @@
         <button on:click={reset} class="btn">
             ↻ Restart
         </button>
-        <button on:click={pausePlay} class="btn">
+        <!-- <button on:click={pausePlay} class="btn">
             ⏸ Pause
-        </button>
+        </button> -->
     </div>
 </div>
 
