@@ -5,13 +5,13 @@
 	import Map from './components/Map.svelte';
 
     
-    // DATA
-    // import data from "$data/data.js";
-    const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
-    const dataUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/misc/mobi-top-bike-data.csv';
-
-    // VARIABLES
+    /// VARIABLES
     let data;
+    const dataUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/misc/mobi-top-bike-data.csv';
+    // create .env in root dir & add VITE_MAPTILER_API_KEY
+    const apiKey = import.meta.env.VITE_MAPTILER_API_KEY; 
+
+    
 
 
     async function fetchData(url) {
@@ -44,7 +44,7 @@
 </main>
 
 <footer>
-    <p class="note">NOTE: tk.</p>
+    <!-- <p class="note">NOTE: tk.</p> -->
     <p class="source">Source:  <a href="https://www.mobibikes.ca/en/system-data" target="_blank">Mobi</a></p>
 </footer>
   
@@ -57,12 +57,7 @@
     header {
 		margin-bottom: 2rem;
 	}
-	header > h1 {
-		/* text-align: center; */
-	}
 	header .subhead {
-		margin: 0 auto;
 		max-width: 525px;
-		/* text-align: center; */
 	}
 </style>
