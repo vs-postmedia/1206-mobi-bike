@@ -30,7 +30,7 @@
 
 <header>
     <h1>The little bike that could</h1>
-    <p class="subhead">Watch Mobi’s busiest shared bike travel 17,330 kilometers from 2017-2025 .</p>
+    <p class="subhead">Watch Mobi’s busiest shared bike travel 17,330 kilometers between 2017 and 2025.</p>
 </header>
 
 <main>
