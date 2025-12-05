@@ -22,7 +22,6 @@
 	"type": "module",
 	"dependencies": {
 		"d3-dsv": "^3.0.1",
-		"dotenv": "^17.2.3",
 		"maplibre-gl": "^5.14.0"
 	}
 }
