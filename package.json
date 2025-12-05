@@ -1,5 +1,5 @@
 {
-	"name": "svelte-template",
+	"name": "1206-mobi-bike",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -22,6 +22,7 @@
 	"type": "module",
 	"dependencies": {
 		"d3-dsv": "^3.0.1",
-		"svelte-select": "^5.7.0"
+		"dotenv": "^17.2.3",
+		"maplibre-gl": "^5.14.0"
 	}
 }

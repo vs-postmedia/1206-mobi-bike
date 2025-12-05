@@ -7,7 +7,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/svelte-template/',
+  base: '/1206-mobi-bike/',
   // base: process.env.MODE === 'production' ? projectPath : '/',
   plugins: [svelte()],
   resolve: {

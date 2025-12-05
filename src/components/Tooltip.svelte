@@ -1,55 +1,27 @@
 <script>
-    // PROPERTIES
-    export let data;
-    export let width;
-
-    // VARS
-    let tooltipWidth;
-    const xNudge = 5;
-    const yNudge = 5;
-
-    // FUNCTIONS
-    // Add commas to numbers
-    function addCommasToNumber(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-
-    // DYNAMIC VARS
-    $: xPosition = data.x + tooltipWidth + xNudge > width ? data.x - tooltipWidth - xNudge : data.x + xNudge; // don't let the tooltip run off the right of the screen
-    $: console.log(data)
+    export let stationName;
+    export let visits;
 </script>
 
-
-<div class="tooltip" 
-    bind:clientWidth={tooltipWidth}
-    style="left: {xPosition}px; top: {data.y + yNudge}px;
-">
-    <h3>{data}</h3>
+<div class="popup-content">
+    <h3 class="station-name">{stationName}</h3>
+    <p class="visits">Departures from this station: {visits}</p>
 </div>
 
 <style>
-    .tooltip {
-        background: rgba(255,255,255,0.85);
-        border-radius: 3px; /* Rounds corners */
-        box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px; /* Gives a nice 3d effect */
-        max-width: 225px;
-        padding: 8px 6px; /* Adds space around content within tooltip */
-        pointer-events: none; /* Prevents tooltip from blocking mouse events */
-        position: absolute; 
-        transition: top 300ms ease, left 300ms ease;
+    .popup-content {
+        font-family: 'BentonSansCond-Reg', sans-serif;
+        padding: 4px 2px;
     }
-    .tooltip h3 {
-        margin-bottom: 5px;
+
+    .station-name {
+        color: var(--black);
+        font-size: 1.2rem;
+        margin-bottom: 7px;
     }
-    .tooltip ul {
-        margin-top: 10px;
-    }
-    #app .tooltip p {
-        font-size: 0.85rem;
-        line-height: 1.3;
-    }
-    .tooltip p .bold {
-        font-family: 'BentonSansCond-Bold';
+
+    .visits {
+        color: var(--black);
+        font-size: 1rem;
     }
 </style>

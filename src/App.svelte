@@ -2,71 +2,50 @@
     // COMPONENTS
     import { onMount } from 'svelte';
     import { csvParse } from 'd3-dsv';
-    import Chart from "$components/Chart.svelte";
-    import Select from "svelte-select"; // https://github.com/rob-balfre/svelte-select
+	import Map from './components/Map.svelte';
 
     
-
     // DATA
     // import data from "$data/data.js";
-    import { menuItems } from "$data/menu-items";
-    const dataUrl = 'https://raw.githubusercontent.com/ajstarks/dubois-data-portraits/master/challenge/2024/challenge03/data.csv';
+    const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
+    const dataUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/misc/mobi-top-bike-data.csv';
 
     // VARIABLES
-    let data, value;
-    const defaultSelectValue = menuItems[0].value;
+    let data;
 
-    // REACTIVE VARIABLES
-    $: value, updateData(value);
 
     async function fetchData(url) {
         const resp = await fetch(url);
-        data = await resp.text();
+        const data = await resp.text();
+        
         return csvParse(data);
-    }
-
-
-    function updateData(value) {
-        if (!value || !value.value) return;
-
-        console.log(value);
     }
 
     async function init() {
         // fetch remote data
         data = await fetchData(dataUrl);
-        // console.log(data);
-
-        // default display selector value
-		value = defaultSelectValue;
     }
 
     onMount(init);
 </script>
 
 <header>
-    <h1>VS SvelteKit Template</h1>
-    <p class="subhead">Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+    <h1>The little bike that could</h1>
+    <p class="subhead">Watch Mobi’s busiest shared bike travel 17,330 kilometers over seven years.</p>
 </header>
 
 <main>
-    <Select items={menuItems}
-        bind:value
-        change={updateData}
-        placeholder="Pick a city..."
-		showChevron="true"
-		listOpen={false}
-    />
-    
-    <Chart 
-        data={data}
-        value={value}
-    />
+    {#if data}
+        <Map
+            data={data}
+            apiKey={apiKey}
+        />
+    {/if}
 </main>
 
 <footer>
     <p class="note">NOTE: tk.</p>
-    <p class="source">Source:  <a href="https:vancouversun.com" target="_blank">TK</a></p>
+    <p class="source">Mobi:  <a href="https://www.mobibikes.ca/en/system-data" target="_blank">TK</a></p>
 </footer>
   
 <style>
