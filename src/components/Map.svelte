@@ -7,11 +7,7 @@
     
     export let data = [];
     export let apiKey;
-
-    console.log(Helper)
     
-    // const MAPTILER_API_KEY = 'ZQY7CVPJ6EF04qaHNoyO';
-    const MAP_STYLE = `https://api.maptiler.com/maps/streets-v2/style.json?key=${apiKey}`;
     
     
     let map;
@@ -20,14 +16,15 @@
     let currentIndex = 0;
     let isPlaying = false;
     let stationVisitCounts = {};
-
+    
     const stationSize = 4
     const currentStationSize = 6;
     const lineColour = '#AFBEDB';
     const stationColour = '#0062A3';
     const currentStationColour = '#9B3F86';
     const STATION_SIZE_INCREMENT = 0.25;
-    const TIME_BETWEEN_STATIONS = 50;  // in milliseconds
+    const TIME_BETWEEN_STATIONS = 35;  // in milliseconds
+    const MAP_STYLE = `https://api.maptiler.com/maps/dataviz/style.json?key=${apiKey}`;
 
     // Calculate map center from stations
     $: mapCenter = data.length > 0 
@@ -150,6 +147,10 @@
         // Initialize with first station
         updateMap(0);
 
+        // Autoplay animation once map is loaded
+        isPlaying = true;
+        animate();
+
         // Add click event for station popups
         map.on('click', 'visited-stations-layer', e => {
             const coordinates = e.features[0].geometry.coordinates.slice();
@@ -224,7 +225,6 @@
         }
 
         const visitedStations = Array.from(visitedStationsMap.values());
-        // const visitedStations = data.slice(0, index + 1);
     
         // Update visited stations (persistent dots) with dynamic sizes based on visit count
         map.getSource('visited-stations').setData({
@@ -308,16 +308,18 @@
 
     function togglePlay() {
         isPlaying = !isPlaying;
+        
         if (isPlaying) {
-        animate();
+            animate();
         } else if (animationFrame) {
-        clearTimeout(animationFrame);
+            clearTimeout(animationFrame);
         }
     }
 
     function reset() {
         isPlaying = false;
         currentIndex = 0;
+        
         if (animationFrame) {
             clearTimeout(animationFrame);
         }
@@ -350,15 +352,17 @@
 
 <style>
     .container {
-        width: 100%;
-        height: 100vh;
-        position: relative;
         font-family: 'BentonSansCond-Reg', sans-serif;
+        height: 100vh;
+        max-height: 500px;
+        position: relative;
+        width: 100%;
     }
 
     .map {
-        width: 100%;
         height: 100%;
+        max-height: 500px;
+        width: 100%;
     }
 
     .display {
@@ -383,10 +387,6 @@
         position: absolute;
         top: 80px;
         left: 10px;
-        /* background: rgba(255,255,255,0.8); */
-        /* padding: 15px; */
-        /* border-radius: 8px; */
-        /* box-shadow: 0 2px 8px rgba(0,0,0,0.2); */
         display: flex;
         gap: 10px;
         align-items: center;

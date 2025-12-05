@@ -31,7 +31,7 @@
 
 <header>
     <h1>The little bike that could</h1>
-    <p class="subhead">Watch Mobi’s busiest shared bike travel 17,330 kilometers over seven years.</p>
+    <p class="subhead">Watch Mobi’s busiest shared bike travel 17,330 kilometers from 2017-2025 .</p>
 </header>
 
 <main>
@@ -45,7 +45,7 @@
 
 <footer>
     <p class="note">NOTE: tk.</p>
-    <p class="source">Mobi:  <a href="https://www.mobibikes.ca/en/system-data" target="_blank">TK</a></p>
+    <p class="source">Source:  <a href="https://www.mobibikes.ca/en/system-data" target="_blank">Mobi</a></p>
 </footer>
   
 <style>
@@ -58,28 +58,11 @@
 		margin-bottom: 2rem;
 	}
 	header > h1 {
-		text-align: center;
+		/* text-align: center; */
 	}
 	header .subhead {
 		margin: 0 auto;
 		max-width: 525px;
-		text-align: center;
-	}
-
-    /* COMBOBOX SELECTOR */
-  	:global(.svelte-select) {
-		margin: 1rem auto !important;
-		max-width: 250px;
-  	}
-  	:global(input:focus) {
-		outline: none;
-  	}
-
-	:global(
-		.svelte-select .selected-item,
-		.svelte-select .item,
-		.svelte-select input
-	) {
-		font-family: 'BentonSansCond-Regular', sans;
+		/* text-align: center; */
 	}
 </style>
