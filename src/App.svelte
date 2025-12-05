@@ -11,9 +11,8 @@
     // create .env in root dir & add VITE_MAPTILER_API_KEY
     const apiKey = import.meta.env.VITE_MAPTILER_API_KEY; 
 
-    
 
-
+    // FUNCTIONS
     async function fetchData(url) {
         const resp = await fetch(url);
         const data = await resp.text();

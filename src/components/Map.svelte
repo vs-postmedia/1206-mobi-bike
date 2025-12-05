@@ -26,14 +26,31 @@
     const TIME_BETWEEN_STATIONS = 35;  // in milliseconds
     const MAP_STYLE = `https://api.maptiler.com/maps/dataviz/style.json?key=${apiKey}`;
 
-    // Calculate map center from stations
+    // $: {
+    //     // Debug: Find entries with invalid coordinates
+    //     if (data.length > 0) {
+    //         const invalidEntries = data.filter((d, index) => {
+    //             const lon = Number(d.lon);
+    //             const lat = Number(d.lat);
+    //             const isInvalid = isNaN(lon) || isNaN(lat);
+    //             if (isInvalid) {
+    //                 console.log(`Invalid entry at index ${index}:`, d);
+    //             }
+    //             return isInvalid;
+    //         });
+            
+    //         if (invalidEntries.length > 0) {
+    //             console.log(`Found ${invalidEntries.length} invalid entries:`, invalidEntries);
+    //         }
+    //     }
+    // }
+        // Calculate map center from stations
     $: mapCenter = data.length > 0 
         ? [
             data.reduce((sum, d) => sum + Number(d.lon), 0) / data.length,
             data.reduce((sum, d) => sum + Number(d.lat), 0) / data.length
         ]
         : [-123.12, 49.27];
-
 
     onMount(() => {
         map = new Maplibregl.Map({
@@ -95,7 +112,8 @@
                 'circle-radius': ['get', 'size'],
                 'circle-color': stationColour,
                 'circle-stroke-width': 1,
-                'circle-stroke-color': '#ffffff'
+                'circle-stroke-color': '#ffffff',
+                'circle-opacity': 0.9
             }
         });
 
@@ -121,8 +139,8 @@
                 'circle-radius': currentStationSize,
                 'circle-color': currentStationColour,
                 'circle-stroke-width': 1,
-                'circle-stroke-color': '#ffffff',
-                'circle-opacity': 0.9
+                // 'circle-stroke-color': '#ffffff',
+                'circle-opacity': 1
             }
         });
 
@@ -316,6 +334,10 @@
         }
     }
 
+    function pausePlay() {
+        isPlaying = !isPlaying;
+    }
+
     function reset() {
         isPlaying = false;
         currentIndex = 0;
@@ -350,6 +372,9 @@
         </button>
         <button on:click={reset} class="btn">
             ↻ Restart
+        </button>
+        <button on:click={pausePlay} class="btn">
+            ⏸ Pause
         </button>
     </div>
 </div>
